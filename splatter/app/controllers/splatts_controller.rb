@@ -33,11 +33,11 @@ class SplattsController < ApplicationController
    # @splatt = Splatt.find(params[:id])
 
   #  if @splatt.update(params[:splatt])
- #     head :no_content
- #   else
- #     render json: @splatt.errors, status: :unprocessable_entity
-#    end
-#  end
+  #     head :no_content
+  #   else
+  #     render json: @splatt.errors, status: :unprocessable_entity
+  #    end
+  #  end
 
   # DELETE /splatts/1
   # DELETE /splatts/1.json
