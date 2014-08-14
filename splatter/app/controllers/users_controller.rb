@@ -51,22 +51,23 @@ class UsersController < ApplicationController
 	@user = User.find(params[:id])
 	render json: @user.splatts
   end
-# GET /users/follows/1
-# GET /users/follows/1.json
+  # GET /users/splatts-feed/1
+  def splatts_feed
+	@feed = Splatt.find_by_sql("SELECT * FROM follows JOIN splatts ON follows.followed_id = splatts.user_id WHERE follows.follower_id = #{params[:id]} ORDER BY created_at DESC")
+	render json: @feed
+  end
+  
   def show_follows
 	@user = User.find(params[:id])
 	render json: @user.follows
   end
 
-# GET /users/followers/1
-# GET /users/followers/1.json
+
   def show_followers
 	@user = User.find(params[:id])	
     render json: @user.followed_by
   end
 
-# POST /users/follows
-# POST /users/follows.json
   def add_follows
 	@user1 = User.find(params[:id])
 	@user2 = User.find(params[:follows_id])
@@ -77,8 +78,6 @@ class UsersController < ApplicationController
   end
   end
 
-# DELETE /users/follows/1/2
-# DELETE /users/follows/1/2.json
   def delete_follows
 	@user1 = User.find(params[:id])
 	@user2 = User.find(params[:follows_id])

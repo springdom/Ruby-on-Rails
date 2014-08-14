@@ -4,6 +4,7 @@ Splatter::Application.routes.draw do
   get 'users/splatts/:id' => 'users#splatts'
   get 'users/follows/:id' => 'users#show_follows'
   get 'users/followers/:id' => 'users#show_followers'
+  get '/users/splatts-feed/:id' => 'users#splatts_feed'
   post 'users/follows' => 'users#add_follows'
   delete 'users/follows/:id/:follows_id' => 'users#delete_follows'
   
