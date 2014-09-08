@@ -15,15 +15,17 @@
 	
 	//UserLogin
 	app.controller("UserLoginController", function() {
-		this.data = {};
-		this.updateUser = function(user) {
-		user.u.name = this.data.name;
-		this.data = {};
-		} 
+
 	});
 	
 	//Registration
 	app.controller("UserRegistrationController", function() {
+		
+	
+	});
+		
+	//Form Controller
+	app.controller("UpdateFormController", function() {
 		this.data = {};
 		this.updateUser = function(user) {
 		user.u.name = this.data.name;
@@ -32,7 +34,7 @@
 	});
 	//user Controller
 	app.controller('UserController', function(User) {
-	this.u = User.get({id:uid});
+	this.u = User.get({user_id:uid});
 	});
 	
 	//Splatt Controller
@@ -40,14 +42,5 @@
 	// add your user code below
 	this.feed = Splatt.get({id:uid});
 	
-	});
-	
-	//Form Controller
-	app.controller("UpdateFormController", function() {
-		this.data = {};
-		this.updateUser = function(user) {
-		user.u.name = this.data.name;
-		this.data = {};
-		} 
 	});
 })();
