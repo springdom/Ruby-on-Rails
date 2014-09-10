@@ -1,45 +1,50 @@
 (function() { // We use this anonymous function to create a closure.
-	var app = angular.module('splatter-web', ['ngResource']);
+    var app = angular.module('splatter-web', ['ngResource']);
+    app.factory('User', function($resource) {
+        return $resource('http://taylor.sqrawler.com/api/users/:id.json', {
+            id: '@id'},
+        {'save': {method: 'POST', url: "http://mcpherson.sqrawler.com/api/users.json"},
+         'update': {method:'PUT'}
+        });
+    });
+    app.controller('UserController', function(User, $scope) {
+        this.data = {};
+        this.ulist = User.query();
+        this.getUser = function(i) {
+            return User.get({
+                id: i
+            });
+        };
+        this.login = function() {
+            this.loggedin_user = this.getUser(this.data.id);
+            this.data = {};
+        };
+        this.updateUser = function() {
+            this.loggedin_user.name = this.data.name;
+            this.loggedin_user.email = this.data.email;
+            this.loggedin_user.blurb = this.data.blurb;
+            this.loggedin_user.$update();
+            this.data = {};
+        };
+        this.createUser = function() {
+            u = new User();
+            u.name = this.data.cname;
+            u.email = this.data.cemail;
+            u.password = this.data.cpassword;
+            u.blurb = this.data.cblurb;
+            u.$save();
+            this.data = {};
+        };
+        this.delUser = function() {
+            //alert("Deleting "+ this.data.delid);
+            User.delete({
+                id: this.data.delid
+            });
+            //get your user from where ever.
+            var user = getSomeUser();
 
-	
-	app.factory('User', function($resource) { //User call
-		return $resource('http://taylor.sqrawler.com/api/users/:id.json', {},
-	{update: {method:'PUT', url:'http://taylor.sqrawler.com/api/users/:id.json'}}
-	)});
-	app.factory('Splatt', function($resource) { //splatt feed call
-		return $resource('http://taylor.sqrawler.com/api/splatts'
-	)});
-	
-	//Global Variables
-	var uid= 1;
-	
-	//UserLogin
-	app.controller("UserLoginController", function() {
-
-	});
-	
-	//Registration
-	app.controller("UserRegistrationController", function() {
-		
-	
-	});
-		
-	//Form Controller
-	app.controller("UpdateFormController", function() {
-		this.data = {};
-		this.updateUser = function(user) {
-		user.u.name = this.data.name;
-		this.data = {};
-		} 
-	});
-	//user Controller
-	app.controller('UserController', function(User) {
-	this.u = User.get({id:uid});
-	});
-	
-	//Splatt Controller
-	app.controller('SplattController', function(Splatt) {
-	// add your user code below
-	this.feed = Splatt.get();
-	});
+            // set your user permissions
+            // here's some contrived example.
+        };
+    });
 })();
