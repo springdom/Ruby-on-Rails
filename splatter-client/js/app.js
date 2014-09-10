@@ -3,7 +3,7 @@
     app.factory('User', function($resource) {
         return $resource('http://taylor.sqrawler.com/api/users/:id.json', {
             id: '@id'},
-        {'save': {method: 'POST', url: "http://mcpherson.sqrawler.com/api/users.json"},
+        {'save': {method: 'POST', url: "http://taylor.sqrawler.com/api/users.json"},
          'update': {method:'PUT'}
         });
     });
