@@ -13,13 +13,16 @@
 		Email: {{user.u.email}}</br>
 		Blurb: {{user.u.blurb}}</p>
 
-	<div ng-controller="SplattController as splatt">
-	<p>ID: {{splatt.feed.user_id}}</br>
+	<div  ng-controller="SplattController as splatt">
+	<div ng-repeat="feed in feeds">
+	<p>User ID: {{splatt.feed.user_id}}</br>
 	Posted: {{splatt.feed.created_at | date: 'dd/MM/yyyy h:mma'}}</br>
 	Splatt: {{splatt.feed.body}}</br>
 	</br>
 	</p> 
 	</div>
+	</div>
+	
 	<form ng-controller="UpdateFormController as form" ng-submit="form.updateUser(user)" name="myForm">
 		<input type="text" ng-model="form.data.name"/>
 		<input type="submit" value="Update user"/>

@@ -7,11 +7,11 @@
 	{update: {method:'PUT', url:'http://taylor.sqrawler.com/api/users/:id.json'}}
 	)});
 	app.factory('Splatt', function($resource) { //splatt feed call
-		return $resource('http://taylor.sqrawler.com/api/splatts'
+		return $resource('http://taylor.sqrawler.com/api/splatts/:id.json'
 	)});
 	
 	//Global Variables
-	var uid= 1;
+	var uid= 2;
 	
 	//UserLogin
 	app.controller("UserLoginController", function() {
@@ -40,6 +40,7 @@
 	//Splatt Controller
 	app.controller('SplattController', function(Splatt) {
 	// add your user code below
-	this.feed = Splatt.get();
+	this.feed = Splatt.get({id:uid});
+	
 	});
 })();
