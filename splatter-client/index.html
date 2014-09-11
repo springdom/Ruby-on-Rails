@@ -52,7 +52,7 @@
     <div class="container">
         <div class="starter-template">
             <div ng-controller="UserController as user">
-                <div>
+                <div ng-hide="user.loggedin_user">
                     <div class="col-md-6">
                         <h1>Login</h1>
                         <form role="form" ng-submit="user.login()">
@@ -79,15 +79,56 @@
                     </div>
                 </div>
                 <div ng-show="user.loggedin_user">
-                    <h3>Basic Info</h3>
-                    <p>User ID
-                        <br>{{user.loggedin_user.id}}</p>
-                    <h1>Welcome!</h1>
-                    <br>
-                    <h3>{{user.loggedin_user.name}}</h3>
-                    <p>Email
-                        <br>{{user.loggedin_user.email}}</p>
-                    <p>{{user.loggedin_user.blurb}}</p>
+                    <!--User info-->
+                    <div>
+                        <h3>Basic Info</h3>
+                        <p>User ID
+                            <br>{{user.loggedin_user.id}}</p>
+                        <h1>Welcome!</h1>
+                        <br>
+                        <h3>{{user.loggedin_user.name}}</h3>
+                        <p>Email
+                            <br>{{user.loggedin_user.email}}</p>
+                        <p>{{user.loggedin_user.blurb}}</p>
+                    </div>
+                    <!--Update account-->
+                    <div class="col-md-6">
+                        <h1>Update your user account</h1>
+                        <form role="form" ng-submit="user.updateUser()">
+                            <input type="text" ng-model="user.data.name" class="form-control" placeholder="Enter your Name" required/>
+                            <br />
+                            <div class="input-group-addon">@</div>
+                            <input type="email" ng-model="user.data.email" placeholder="Enter email" class="form-control" required/>
+                            <br />
+                            <textarea ng-model="user.data.blurb"></textarea>
+                            <br />
+                            <input class="btn btn-default" type="submit" value="Update" placeholder="Optional" />
+                        </form>
+                    </div>
+                    <!--Delete account-->
+                    <div class="col-md-6">
+                        <h1>Delete Account</h1>
+                        <form role="form" ng-submit="user.delUser()" required>
+                            <select ng-model="user.data.delid">
+                                <option ng-repeat="u in user.ulist">{{u.id}}</option>
+                            </select>
+                            <input class="btn btn-default" type="submit" value="Delete" />
+                        </form>
+                    </div>
+                    <!--View Splatts-->
+                    <div ng-controller="SplattsController as splatt">
+                        <form role="form" ng-submit="splatt.SplattsFeed()">
+                            <fieldset>
+                                <p>ID
+                                    <input type="text" ng-model="splatt.data.id" />
+                                </p>
+                                <input class="btn btn-default" type="submit" value="View Splatts" />
+                                <div ng-repeat="Splatt in splatt.splatts_feed">
+                                    <p>{{Splatt.user_id}}:{{Splatt.body}}</p>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
