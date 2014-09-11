@@ -56,7 +56,7 @@
                             <h1>Login</h1>
                             <form role="form" ng-submit="user.login()">
                                 <label>Enter User ID</label>
-                                <input type="text" ng-model="user.data.id" class="form-control" required/>
+                                <input type="number" ng-model="user.data.id" class="form-control" required/>
                                 <input ng-click="" id="loginID" type="submit" value="Login" class="btn btn-primary btn-lg btn-block" ng-model="checkbox" />
                             </form>
                         </div>
@@ -76,10 +76,10 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="row">
                         <h2>View User Splatts and Info</h2>
-                        <form ng-submit="user.info()">
-                            <select ng-model="user.data.infoid">
+                        <form ng-submit="user.feedinfo()">
+                            <select n ng-model="user.data.infoid">
                                 <option ng-repeat="u in user.ulist">{{u.id}}</option>
                             </select>
                             <input type="submit" value="Check Info" />
@@ -90,89 +90,108 @@
                             <li>Email: {{user.info_user.email}}</li>
                             <li>{{user.info_user.blurb}}</li>
                         </ul>
+                        <h3>Splatts by - {{user.info_user.name}}</h3>
+                        <div class="well well-lg" ng-repeat="feed in user.feed">
+                            <p>{{feed.body}}
+                                <br><small>created on</small>{{feed.created_at | date:'dd-M-yyyy H:mm'}}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div ng-show="user.loggedin_user">
-                <!--User info-->
-                <div class="jumbotron">
+                <div ng-show="user.loggedin_user">
+                    <!--User info-->
+                    <div class="jumbotron">
 
-                    <h3>Welcome!<br>User<br> {{user.loggedin_user.name}}</h3>
-                    <ul>
-                        <li>User ID: {{user.loggedin_user.id}}</li>
-                        <li>Email: {{user.loggedin_user.email}}</li>
-                        <li>{{user.loggedin_user.blurb}}</li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <!--Update account-->
-                    <div class="col-xs-6 col-md-4">
-                        <h1>Update your user account</h1>
-                        <form role="form" ng-submit="user.updateUser()">
-                            <input type="text" ng-model="user.data.name" class="form-control" placeholder="Enter your Name" required/>
-                            <br />
-                            <div class="input-group-addon">@</div>
-                            <input type="email" ng-model="user.data.email" placeholder="Enter email" class="form-control" required/>
-                            <br />
-                            <textarea ng-model="user.data.blurb"></textarea>
-                            <br />
-                            <input class="btn btn-default" type="submit" value="Update" placeholder="Optional" />
-                        </form>
+                        <h3>Welcome!<br>User<br> {{user.loggedin_user.name}}</h3>
+                        <ul>
+                            <li>User ID: {{user.loggedin_user.id}}</li>
+                            <li>Email: {{user.loggedin_user.email}}</li>
+                            <li>{{user.loggedin_user.blurb}}</li>
+                        </ul>
                     </div>
-                    <!--View Splatts-->
-                    <div class="col-xs-12 col-md-8">
-                        <h1>Splatts</h1>
-                        <div class="row">
-                            <h2>Post a Splatt</h2>
-                            <form role="form" ng-submit="user.PostSplatt()">
-                                <input class="form-control" rows="3" type="textarea" ng-model="user.data.splattbody" />
-                                <input type="submit" value="Post" class="btn btn-primary btn-lg btn-block" />
+                    <a href="index.html">LogOut</a>
+                    <div class="row">
+                        <!--Update account-->
+                        <div class="col-xs-6 col-md-4">
+                            <h1>Update your user account</h1>
+                            <form role="form" ng-submit="user.updateUser()">
+                                <input type="text" ng-model="user.data.name" class="form-control" placeholder="Enter your Name" required/>
+                                <br />
+                                <div class="input-group-addon">@</div>
+                                <input type="email" ng-model="user.data.email" placeholder="Enter email" class="form-control" required/>
+                                <br />
+                                <textarea ng-model="user.data.blurb"></textarea>
+                                <br />
+                                <input class="btn btn-default" type="submit" value="Update" placeholder="Optional" />
                             </form>
                         </div>
-                        <div class="row">
-                            <h2>View User Splatts and Info</h2>
-                            <form ng-submit="user.info()">
-                                <select ng-model="user.data.infoid">
-                                    <option ng-repeat="u in user.ulist">{{u.id}}</option>
-                                </select>
-                                <input type="submit" value="Check Info" />
-                            </form>
-                            <ul>
-                                <li>User ID: {{user.info_user.id}}</li>
-                                <li>Name: {{user.info_user.name}}</li>
-                                <li>Email: {{user.info_user.email}}</li>
-                                <li>{{user.info_user.blurb}}</li>
-                            </ul>
-                            <h3>My Splatts</h3>
-                            Search:
-                            <input ng-model="searchText">
-                            <div ng-repeat="splattinfo in user.splattsinfo | filter:searchText">
-                                <hr />
-                                <p>{{splattinfo.body}}</p>
-                                <p>{{splattinfo.created_at | date:'dd-M-yyyy H:mm'}}</p>
+                        <!--View Splatts-->
+                        <div class="col-xs-12 col-md-8">
+                            <h1>Splatts</h1>
+                            <div class="row">
+                                <h2>Post a Splatt</h2>
+                                <form role="form" ng-submit="user.PostSplatt()">
+                                    <input class="form-control" rows="3" type="textarea" ng-model="user.data.splattbody" />
+                                    <input type="submit" value="Post" class="btn btn-primary btn-lg btn-block" />
+                                </form>
+                            </div>
+                            <div class="row">
+                                <h2>View User Splatts and Info</h2>
+                                <form ng-submit="user.feedinfo()">
+                                    <select n ng-model="user.data.infoid">
+                                        <option ng-repeat="u in user.ulist">{{u.id}}</option>
+                                    </select>
+                                    <input type="submit" value="Check Info" />
+                                </form>
+                                <ul>
+                                    <li>User ID: {{user.info_user.id}}</li>
+                                    <li>Name: {{user.info_user.name}}</li>
+                                    <li>Email: {{user.info_user.email}}</li>
+                                    <li>{{user.info_user.blurb}}</li>
+                                </ul>
+                                <h3>Splatts by - {{user.info_user.name}}</h3>
+                                <div class="well well-lg" ng-repeat="feed in user.feed">
+                                    <p>{{feed.body}}
+                                        <br><small>created on</small>{{feed.created_at | date:'dd-M-yyyy H:mm'}}</p>
+                                </div>
+                            </div>
+                            <!--Follow Unfollow-->
+                            <div class="row">
+                                <h2>Follow a user</h2>
+                                <div>
+                                    <form role="form" ng-submit="user.Unfollow()">
+                                        <label>Enter user to Follow</label>
+                                        <input type="number" ng-model="user.data.Unfollowid" />
+                                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Follow User" />
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h2>Unfollow a user</h2>
+                                <div>
+                                    <form role="form" ng-submit="user.Follow()">
+                                        <label>Enter user to Unfollow</label>
+                                        <input type="number" ng-model="user.data.unfollow_id" />
+                                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Unfollow User" />
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <h1></h1>
-                </div>
-                <!--Delete account-->
-                <div class="row">
-                    <div class="col-xs-4">
-                        <h1>Delete Account</h1>
-                        <form role="form" ng-submit="user.delUser()" required>
-                            <select ng-model="user.data.delid">
-                                <option ng-repeat="u in user.ulist">{{u.id}}</option>
-                            </select>
-                            <input class="btn btn-default" type="submit" value="Delete" />
-                        </form>
+                    <!--Delete account-->
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1>Delete Account</h1>
+                            <form role="form" ng-submit="user.delUser()" required>
+                                <select ng-model="user.data.delid">
+                                    <option ng-repeat="u in user.ulist">{{u.id}}</option>
+                                </select>
+                                <input class="btn btn-default" type="submit" value="Delete" />
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-    </div>
-    </div>
-    </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

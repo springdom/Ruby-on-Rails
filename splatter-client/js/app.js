@@ -47,6 +47,7 @@
             return User.get({
                 id: i
             });
+            console.log(this.getUser);
         };
         //user login and CRUD
         this.login = function() {
@@ -59,8 +60,8 @@
             });
             this.data = {};
         };
+
         this.updateUser = function() {
-            // regexp from https://github.com/angular/angular.js/blob/master/src/ng/directive/input.js#L4
             this.loggedin_user.name = this.data.name;
             this.loggedin_user.email = this.data.email;
             this.loggedin_user.blurb = this.data.blurb;
@@ -93,11 +94,31 @@
             User.addSplatt({}, postData);
             this.data = {}
         };
-        this.info = function() {
+        this.feedinfo = function() {
             this.info_user = this.getUser(this.data.infoid);
-            this.splattsinfo = User.mySplatts({
+            this.feed = User.mySplatts({
                 id: this.data.infoid
             });
+            this.data = {};
+        };
+        //Follow Unfollow
+        this.Follow = function() {
+            var user_id = this.loggedin_user.id;
+            var follows_id = this.data.follows_id;
+            User.follow({
+                id: user_id,
+                follows_id: follows_id
+            });
+            this.data = {};
+        };
+        this.Unfollow = function() {
+            var user_id = this.loggedin_user.id;
+            var unfollow_id = this.data.unfollow_id;
+            User.follow({
+                id: this.user_id,
+                follows_id: this.follows_id
+            });
+            this.data = {};
             this.data = {};
         };
     });
