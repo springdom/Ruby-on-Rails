@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="splatter-web">
+	<head>
+		<title>Login</title>
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-resource.js"></script>
+		<script src="js/app.js"></script>
+	</head>
+	<body>
+	<form ng-controller="UserLoginController as login" ng-submit="form.updateUser(user)" name="myForm">
+		<input type="text" ng-model="form.data.name"/>
+		<input type="text" ng-model="form.data.email"/>
+		<input type="text" ng-model="form.data.password"/>
+		
+		<input type="submit" value="Update user"/>
+	</form>
+</div>
+</body>
+</html>
+

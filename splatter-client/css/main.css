@@ -1,0 +1,37 @@
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+.css-form input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}
+.css-form input.ng-valid.ng-dirty {
+    background-color: #78FA89;
+}
+.animate-hide {
+    -webkit-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+    line-height: 20px;
+    opacity: 1;
+    padding: 10px;
+    border: 1px solid black;
+    background: white;
+}
+.animate-hide.ng-hide {
+    line-height: 0;
+    opacity: 0;
+    padding: 0 10px;
+}
+.check-element {
+    padding: 10px;
+    border: 1px solid black;
+    background: white;
+}
+ul,
+li {
+    list-style-type: none;
+    list-style: none;
+}
