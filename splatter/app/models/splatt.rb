@@ -1,6 +1,5 @@
-class Splatt
-	include Mongoid::Document
-	include Mongoid::Timestamps::Created
-	field :body, type: String
-	embedded_in :user
+class Splatt < Hashie::Dash
+	property :id
+	property :body
+	property :created_at
 end
